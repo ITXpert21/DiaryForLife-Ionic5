@@ -1,0 +1,25 @@
+<ion-header >
+  <ion-toolbar class="pageHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button color='light'></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><span style="color: aliceblue; font-size: 18pt;">Detail Diary</span></ion-title>
+    <ion-buttons slot="end">
+      <ion-button  fill="clear"><span style="color: aliceblue;">&nbsp;&nbsp;&nbsp;&nbsp;</span></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-item >
+      <ion-icon name="newspaper-outline" slot="start"></ion-icon>
+      <ion-label style="font-size: 20px; font-weight: 600;">{{diarydate | date: 'MM/dd/yyyy'}}</ion-label>
+      <!-- <ion-icon name="chevron-forward-outline" slot="end"></ion-icon> -->
+    </ion-item>
+  
+    <ion-card-content>
+     {{post_content}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

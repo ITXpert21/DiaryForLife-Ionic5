@@ -1,0 +1,77 @@
+
+
+ion-item{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+ion-col.alignclass {
+    text-align: center;
+}
+ion-col.alignBtnclass {
+    text-align: right;
+} 
+ion-row.avatarRow {
+    align-items: center; 
+    justify-content: center;
+    height: 200px;
+} 
+ion-row.pageHeader {
+    background-color: #4a2120; 
+    align-items: center;
+} 
+ion-row.inputRow {
+    align-items: center; 
+    justify-content: center;
+} 
+
+.headerIcon{
+    font-size: 28pt;
+    color: aliceblue;
+}
+.avatar{
+    height: 120px;
+    width: 120px;
+    border-color: #4a2120;
+    border-width: 1px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(204, 201, 201);
+
+    // background-position: center; 
+} 
+.cameraImg{
+    width: 120px;
+    height: 120px;
+    border-color: #4a2120;
+    border-width: 1px;
+    border-radius: 50%;
+    border-style: solid;
+    background-color: rgb(204, 201, 201);
+    text-align: center;
+    position: relative;
+    background-size:cover;
+    background-repeat: no-repeat;
+    // background-position: center;
+    display: block;
+} 
+.cameraIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30pt;
+    display: block;
+    color: #4a2120;
+}
+.avatarImg{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.error{
+    //text-align: center;
+    color: red($color: #df3232);
+}

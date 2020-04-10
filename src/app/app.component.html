@@ -1,0 +1,21 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="content1">
+      <!-- <ion-header>
+        <ion-toolbar class="pageHeader" >
+          <ion-title>Navigate</ion-title>
+        </ion-toolbar>
+      </ion-header> -->
+      <ion-content class="pageHeader">
+        <ion-img src='../assets/imgs/logo.png' style="height: 100px; padding: 20px 20px 20px 20px; "></ion-img>
+        <ion-list *ngFor="let pages of navigate" style="padding-top: 0px; padding-bottom: 0px;">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="pages.url" routerDirection="forward" class="pageHeader" >
+              <ion-icon [name]="pages.icon" slot="start" color="light"></ion-icon>
+                 <span style="color: aliceblue;">{{pages.title}} </span>
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+<ion-router-outlet id="content1"></ion-router-outlet>
+</ion-app>

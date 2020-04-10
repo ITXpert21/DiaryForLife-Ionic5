@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-row class="pageHeader">
+    <ion-col size="4">
+      <ion-icon name="chevron-back-outline" class="headerIcon" (click)="gotoHome()"></ion-icon> 
+    </ion-col>
+    <ion-col size="4" class="alignclass">
+      <ion-label style="color: aliceblue; font-size: 18pt;">Sign Up</ion-label>
+    </ion-col>  
+    <ion-col size="4" class="alignBtnclass">
+      <ion-button fill="clear" (click)="clickDone()"><span style="color: aliceblue;">Done</span></ion-button>
+    </ion-col>       
+  </ion-row>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signupForm" (ngSubmit)="clickDone()" novalidate>
+  <ion-row class="avatarRow" *ngIf="showAvatar">
+    <!-- <div class="avatar">
+      <img src={{loadImage.path}} class="avatarImg" (click)="selectImage()"/>
+    </div> -->
+    <div *ngIf="userImage != ''" (click)="selectImage()">
+      <div class="avatar" [style.background-image]="'url('+loadImage.path+')'"></div>
+    </div>    
+  </ion-row>
+  <ion-row class="avatarRow" *ngIf="!showAvatar">
+    <div class="cameraImg">
+      <ion-icon name="camera-outline" class="cameraIcon" (click)="selectImage()"></ion-icon>
+    </div>
+  </ion-row>
+  
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>First Name:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input formControlName="firstname_form" type="text" required ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-item> 
+  <div style="width: 100%; text-align: center;"> 
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.firstname_form.errors?.required">
+      First name is required.
+    </span>
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.firstname_form.errors?.minlength">
+      First name should be min 2 chars long.
+    </span>
+  </div>   
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Last Name:</ion-label>
+      </ion-col> 
+      <ion-col size="7">
+        <ion-input  formControlName="lastname_form" type="text" required ></ion-input>
+      </ion-col> 
+    </ion-row>   
+  </ion-item>  
+  <div style="width: 100%; text-align: center;"> 
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.lastname_form.errors?.required">
+      Last name is required.
+    </span>
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.lastname_form.errors?.minlength">
+      Last name should be min 2 chars long.
+    </span>
+  </div>
+  
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Email:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input formControlName="email_form" type="email" required ></ion-input>
+      </ion-col> 
+    </ion-row>  
+  </ion-item>
+  <div style="width: 100%; text-align: center;"> 
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.email_form.errors?.required">
+      Email is required.
+    </span>
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.email_form.errors?.pattern">
+      Please provide valid email id.
+    </span>
+  </div> 
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Password:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input type="password" formControlName="password_form"  required ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-item>  
+  <div style="width: 100%; text-align: center;"> 
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.password_form.errors?.required">
+      Last name is required.
+    </span>
+    <span style="color: brown;" *ngIf="isSubmitted && errorControl.password_form.errors?.minlength">
+      Last name should be min 6 chars long.
+    </span>
+  </div>  
+</form>
+</ion-content>
+
+
+
+
+

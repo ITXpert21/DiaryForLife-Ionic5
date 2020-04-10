@@ -1,0 +1,35 @@
+ion-content{
+  --background: url('../../assets/imgs/background.png') no-repeat center center / cover;
+}
+// ion-item {
+//   --background: none;
+//     opacity:1;
+// }
+
+ion-item{
+  max-width: 80% !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+.logoitem {
+  width: 100%; 
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.btn {
+  display:block;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 80%;
+}
+.div_signup{
+  text-align: center; 
+  width: 100%;
+  margin-top: 20px;
+}

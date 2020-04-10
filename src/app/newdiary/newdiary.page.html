@@ -1,0 +1,22 @@
+<ion-header >
+  <ion-toolbar class="pageHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button color='light'></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><span style="color: aliceblue; font-size: 18pt;">Add Diary</span></ion-title>
+    <ion-buttons slot="end">
+      <ion-button  fill="clear" (click)="clickDone()"><span style="color: aliceblue;">Done</span></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" [(ngModel)]="diarydate"></ion-datetime>
+    </ion-item>  
+    <ion-item>
+      <ion-textarea rows="25" cols="20" placeholder="Today is so happy..." [(ngModel)]="post_content" ></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

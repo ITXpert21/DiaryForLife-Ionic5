@@ -1,0 +1,130 @@
+<ion-header >
+  <ion-toolbar class="pageHeader">
+    <ion-buttons slot="start">
+      <ion-menu-button color='light'></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center"><span style="color: aliceblue; font-size: 18pt;">Profile</span></ion-title>
+    <ion-buttons slot="end">
+      <div *ngIf="profileAction">
+        <ion-button  fill="clear" (click)="clickDone()"><span style="color: aliceblue;">Done</span></ion-button>
+      </div>
+      <div *ngIf="!profileAction">
+        <ion-button fill="clear" (click)="clickEdit()"><span style="color: aliceblue;">Edit</span></ion-button>
+      </div>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="showContent">
+  <form [formGroup]="profileForm" (ngSubmit)="clickDone()" novalidate>
+  <ion-row class="avatarRow" *ngIf="!selectedAvatarFromDevice">
+    <!-- <div class="avatar" *ngIf="userImage != ''">
+      <img class="avatarImg" src={{userImage}} (click)="selectImage()"/>
+    </div> -->
+
+    <div *ngIf="userImage != ''" (click)="selectImage()">
+      <div class="avatar" [style.background-image]="'url('+userImage+')'"></div>
+    </div> 
+    <div class="cameraImg" *ngIf="userImage == ''" (click)="selectImage()">
+      <ion-icon name="camera-outline" class="cameraIcon" (click)="selectImage()"></ion-icon>
+    </div>    
+  </ion-row>
+  <ion-row class="avatarRow" *ngIf="selectedAvatarFromDevice">
+    <!-- <div class="avatar" [style.backgroundImage]="{'background-image':'url('+ loadImage.path +')'}">
+      <img src={{loadImage.path}} class="avatarImg" (click)="selectImage()"/>
+    </div> -->
+    <div class="avatar" [style.background-image]="'url('+loadImage.path+')'" (click)="selectImage()"></div> 
+
+  </ion-row>
+
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>First Name:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input value="{{first_name}}" #inputId id="first_name" type="text" formControlName="firstname_form" readonly={{profileReadonly}}></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-item>  
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Last Name:</ion-label>
+      </ion-col> 
+      <ion-col size="7">
+        <ion-input value={{last_name}} readonly={{profileReadonly}} type="text" formControlName="lastname_form"></ion-input>
+      </ion-col> 
+    </ion-row>   
+  </ion-item>  
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Email:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input value={{email}} readonly={{profileReadonly}} type="text" formControlName="email_form"></ion-input>
+      </ion-col> 
+    </ion-row>  
+  </ion-item>
+  <!-- <ion-item>
+        Birthday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-datetime  value={{birthday}} disabled={{profileReadonly}} [(ngModel)]="birthday" displayFormat="MM/DD/YYYY" placeholder="Select Date"></ion-datetime>
+  </ion-item>   
+  <ion-item>
+        Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-select placeholder={{gender}} disabled={{profileReadonly}} [(ngModel)]="gender">
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Male">Male</ion-select-option>
+        </ion-select>
+  </ion-item>    -->
+  <ion-item>
+    <ion-row class="inputRow">
+      <ion-col size="5">
+        <ion-label>Password:</ion-label>
+      </ion-col>
+      <ion-col size="7">
+        <ion-input type="password" value={{password}} readonly={{profileReadonly}} formControlName="password_form"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-item>  
+  </form>  
+</ion-content>
+
+
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic 4 Image Picker Demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h3>Image Picker</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)="selectImage()">Choose Images</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="images">
+          <div class="one-image" *ngFor="let img of imageResponse">
+            <img src="{{img}}" alt="" srcset="">
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content> -->

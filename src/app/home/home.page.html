@@ -1,0 +1,28 @@
+
+<!-- <ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content >
+  <div class="logoitem">
+    <img src="../../assets/imgs/logo.png" width="200px" height="80px"/>
+  </div>
+  <ion-item>
+    <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-button  class="btn" (click)="login()" >
+    <span style="color: aliceblue; font-size: 14pt; font-weight: bold;">Log in</span>
+  </ion-button>
+  <div class="div_signup">
+    <span style="color: rgb(106, 106, 107);">Don't have account ? </span><span style="color: #4a2120; font-size: 14pt;" (click)="gotoSignup()"> SignUp</span>   
+  </div>
+</ion-content>
