@@ -1,28 +1,45 @@
 
-<!-- <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
 <ion-content >
-  <div class="logoitem">
-    <img src="../../assets/imgs/logo.png" width="200px" height="80px"/>
-  </div>
-  <ion-item>
-    <ion-input placeholder="Email" [(ngModel)]="email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
-  </ion-item>
-  <ion-button  class="btn" (click)="login()" >
-    <span style="color: aliceblue; font-size: 14pt; font-weight: bold;">Log in</span>
-  </ion-button>
-  <div class="div_signup">
-    <span style="color: rgb(106, 106, 107);">Don't have account ? </span><span style="color: #4a2120; font-size: 14pt;" (click)="gotoSignup()"> SignUp</span>   
+  <div class="section">
+    <img src="../../assets/imgs/logo.png" width="150px" height="100px" style="margin-top: -15%;"/>
+    <p><span class="logotext1">My</span><span class="logotext2"> Diary</span></p>
+    <p><span class="signinText">S I G N &nbsp;I N</span></p>
+    <div class="divideline"></div>
+    <ion-item>
+      <button ion-button clear  type="button" item-left  style="background-color: white;">
+        <ion-icon name="mail-outline" style="font-size: large;"></ion-icon>
+      </button>       
+      <ion-input placeholder="  Email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button clear  type="button" item-left style="background-color: white;">
+        <ion-icon name="lock-closed-outline" style="font-size: large;"></ion-icon>
+      </button>
+      <div *ngIf="!showPasswordText">
+        <ion-input placeholder="  Password" type="password" [(ngModel)]="password"></ion-input>
+      </div>      
+      <div *ngIf="showPasswordText">
+        <ion-input placeholder="  Password" type="text" [(ngModel)]="password"></ion-input>
+      </div>      
+      
+      <button ion-button clear  type="button" item-right (click)="showPasswordText = !showPasswordText" style="background-color: white;">
+        <ion-icon name="eye-outline" style="font-size: large;"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-button  class="btn" (click)="login()" >
+      <span style="color: aliceblue; font-size: 14pt; font-weight: bold;">Sign in</span>
+    </ion-button>    
+  </div>  
+  <div class="footer">
+    <ion-grid>    
+    <ion-row>
+      <ion-col class="signupView" (click)="gotoSignup()">
+        <ion-label><span style="color: white;">Create an account</span></ion-label>
+      </ion-col>
+      <ion-col class="forgotView" (click)="gotoForgotPwd()">
+        <ion-label><span style="color: white;">Forgot password?</span></ion-label>
+      </ion-col>      
+    </ion-row>
+  </ion-grid>
   </div>
 </ion-content>

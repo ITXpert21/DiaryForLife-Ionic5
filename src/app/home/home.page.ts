@@ -55,7 +55,7 @@ export class HomePage {
       this.storage.set('token',userinfo.token);
       this.storage.set('email',this.password);
       console.log(this.storage.get('token'));
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/first']);
     },error => {  
       loading.dismiss();
       this.presentToast("login failed.");

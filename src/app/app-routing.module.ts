@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'detaildiary',
     loadChildren: () => import('./detaildiary/detaildiary.module').then( m => m.DetaildiaryPageModule)
   },
+  {
+    path: 'first',
+    loadChildren: () => import('./first/first.module').then( m => m.FirstPageModule)
+  },
 
 ];
 

@@ -95,7 +95,9 @@
       "cordova-plugin-filepath": {},
       "cordova-plugin-crop": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.10.0"
       }
