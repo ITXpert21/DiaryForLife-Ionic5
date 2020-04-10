@@ -4,7 +4,6 @@ import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthenticationService  } from '../services/authentication.service';
 import { User } from  '../model/user';
 import { Storage } from '@ionic/storage';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -52,6 +51,7 @@ export class HomePage {
     }
     this.authenticationService.doLogin(new User(credential)).subscribe((userinfo) => {
       loading.dismiss();
+      //this.storage.remove('token');
       this.storage.set('token',userinfo.token);
       this.storage.set('email',this.password);
       console.log(this.storage.get('token'));
