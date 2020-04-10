@@ -188,28 +188,34 @@ export class SignupPage implements OnInit {
     };
     this.camera.getPicture(options).then(imagePath => {
       if (this.plt.is('android') /*&& sourceType === this.camera.PictureSourceType.PHOTOLIBRARY*/) {
-          this.filePath.resolveNativePath(imagePath)
-              .then(filePath => {
-                let correctPath = "";
-                let currentName = "";
-                if(sourceType === this.camera.PictureSourceType.PHOTOLIBRARY){
-                   correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-                   currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-                }
-                if(sourceType === this.camera.PictureSourceType.CAMERA){
-                   correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-                   currentName = filePath.substr(filePath.lastIndexOf('/') + 1);
-                }
-                 // let currentName = filePath.substr(filePath.lastIndexOf('/') + 1);
+        this.filePath.resolveNativePath(imagePath)
+        .then(filePath => {
+          let correctPath = "";
+          let currentName = "";
+          if(sourceType === this.camera.PictureSourceType.PHOTOLIBRARY){
+              correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+              currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+          }
+          if(sourceType === this.camera.PictureSourceType.CAMERA){
+              correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+              currentName = filePath.substr(filePath.lastIndexOf('/') + 1);
+          }
+          //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+          let native_filePath = correctPath + currentName;
+          let resPath = this.pathForImage(native_filePath);
+          this.showAvatar = true;
+          this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
 
-                  // alert("correctPath = " + correctPath);
-                  // alert("currentName = " + currentName);
-                  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-              });
+        });
       } else {
           var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
           var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-          this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+          let native_filePath = correctPath + currentName;
+          let resPath = this.pathForImage(native_filePath);
+          this.showAvatar = true;
+          this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
+
+          //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
     });
 
