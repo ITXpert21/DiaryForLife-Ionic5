@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-icon name="arrow-back-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon name="add-circle-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="gotoNewPost()"></ion-icon>
+    </ion-buttons>    
+    <div style="width: 100%; text-align: center;  ">
+      <ion-title>All Posts </ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="isViewType">
+    <ion-grid>
+      <ion-row style="margin-top: 10px;">
+        <ion-col size='10'>
+          <ion-label>Personal Health Information</ion-label>
+        </ion-col>
+        <ion-col size='2'>
+          <ion-icon name="list-outline" style="font-size: 16pt; color: #04d082; margin-right: 10px;" (click)="selectViewType()"></ion-icon>
+        </ion-col>  
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row style="margin-bottom: 10px;">
+        <ion-col style="text-align: center;">
+          <ion-label>April 8</ion-label>
+          <img src="../../assets/imgs/test.png">
+          <ion-label>post title</ion-label>
+        </ion-col>
+        <ion-col style="text-align: center; ">
+          <ion-label>April 8</ion-label>
+          <img src="../../assets/imgs/test.png">
+          <ion-label>post title</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <ion-label>April 8</ion-label>
+          <img src="../../assets/imgs/test.png">
+          <ion-label>post title</ion-label>
+        </ion-col>
+        <ion-col style="text-align: center; ">
+          <ion-label>April 8</ion-label>
+          <img src="../../assets/imgs/test.png">
+          <ion-label>post title</ion-label>
+        </ion-col>
+      </ion-row>    
+    </ion-grid>
+  </div>
+  <div  *ngIf="!isViewType">
+    <ion-row style="margin-top: 10px;">
+      <ion-col size='10'>
+        Perosnal Health Information
+      </ion-col>
+      <ion-col size='2'>
+        <ion-icon name="grid-outline" style="font-size: 16pt; color: #04d082; margin-right: 10px;" (click)="selectViewType()"></ion-icon>
+      </ion-col>
+    </ion-row>
+
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="../../assets/imgs/test.png">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Post main Title</h2>
+          <h3>Posted Date</h3>
+        </ion-label>
+        <ion-button  (click)="removeCategory()" size='small' color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>        
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="../../assets/imgs/test.png">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Post main Title</h2>
+          <h3>Posted Date</h3>
+        </ion-label>
+        <ion-button  (click)="removeCategory()" size='small' color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>        
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="../../assets/imgs/test.png">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Post main Title</h2>
+          <h3>Posted Date</h3>
+        </ion-label>
+        <ion-button  (click)="removeCategory()" size='small' color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>        
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

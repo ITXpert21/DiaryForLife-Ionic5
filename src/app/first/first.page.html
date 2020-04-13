@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-list *ngIf="!isEmptyCategories">
-    <ion-item (click)="gotoPosts()" *ngFor="let category of categories">
+    <ion-item (click)="gotoPosts(category.ID)" *ngFor="let category of categories">
       <ion-col size='9'>
         <ion-label><span style="font-size: 11pt; color: rgb(54, 54, 54);">{{category.name}}</span> </ion-label>
       </ion-col>

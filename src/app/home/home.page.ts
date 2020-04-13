@@ -51,10 +51,12 @@ export class HomePage {
     }
     this.authenticationService.doLogin(new User(credential)).subscribe((userinfo) => {
       loading.dismiss();
-      //this.storage.remove('token');
+     // this.storage.remove('token');
+     console.log('userinfo', userinfo);
       this.storage.set('token',userinfo.token);
       this.storage.set('email',this.password);
-      console.log(this.storage.get('token'));
+      alert(userinfo.token);
+      
       this.router.navigate(['/first']);
     },error => {  
       loading.dismiss();

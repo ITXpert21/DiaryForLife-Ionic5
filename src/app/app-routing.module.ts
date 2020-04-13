@@ -32,6 +32,14 @@ const routes: Routes = [
     path: 'first',
     loadChildren: () => import('./first/first.module').then( m => m.FirstPageModule)
   },
+  {
+    path: 'post',
+    loadChildren: () => import('./post/post.module').then( m => m.PostPageModule)
+  },
+  {
+    path: 'newpost',
+    loadChildren: () => import('./newpost/newpost.module').then( m => m.NewpostPageModule)
+  },
 
 ];
 

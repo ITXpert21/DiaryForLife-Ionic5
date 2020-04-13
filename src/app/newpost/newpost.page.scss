@@ -1,0 +1,61 @@
+ion-item{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-row{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-title{
+    color: #04d082;        
+}
+.mainImg{
+    max-width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+    background-color: #d6d6d6;
+    text-align: center;
+    // position: relative;
+    background-size:cover;
+    background-repeat: no-repeat;
+    // background-position: center;
+    display: block;
+
+}
+.avatar{
+    height: 120px;
+    width: 120px;
+    border-color: #4a2120;
+    border-width: 1px;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(204, 201, 201);
+
+    // background-position: center; 
+} 
+.cameraIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30pt;
+    display: block;
+    color: #fffcfc;
+}
+.featurePhotoText{
+    max-width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.submitBtn{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+
+}
+

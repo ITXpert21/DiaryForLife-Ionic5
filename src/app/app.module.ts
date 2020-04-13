@@ -12,11 +12,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
-
 import { HttpClientModule } from  '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AuthenticationService } from  './services/authentication.service';
 import { IonicStorageModule } from '@ionic/storage';
+
+import { MediaCapture} from '@ionic-native/media-capture/ngx';
+import { StreamingMedia} from '@ionic-native/streaming-media/ngx';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { VideoEditor } from '@ionic-native/video-editor/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,6 +35,11 @@ import { IonicStorageModule } from '@ionic/storage';
     FilePath,
     AuthenticationService,
     WebView,
+     MediaCapture,
+     FileChooser,
+     FileTransfer,
+     StreamingMedia,
+     VideoEditor,
     // ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

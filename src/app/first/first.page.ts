@@ -142,8 +142,14 @@ export class FirstPage implements OnInit {
     });     
   }
 
-  gotoPosts(){
-    this.router.navigate(['/post']);
+  gotoPosts(categoryId){
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        categoryId: categoryId
+      }
+    };    
+    this.router.navigate(['/post'], navigationExtras);
   }  
 
   gotoReminder(){

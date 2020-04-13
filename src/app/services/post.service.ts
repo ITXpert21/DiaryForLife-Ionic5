@@ -11,7 +11,7 @@ import 'rxjs/Rx';
   providedIn: 'root'
 })
 export class PostService {
-  baseUrl:string = "http://mydiary.betaplanets.com/wp-json/";
+  baseUrl:string = "http://mydiaryforlife.betaplanets.com/wp-json/";
 
   constructor(private  httpClient : HttpClient) { }
 
@@ -37,4 +37,13 @@ export class PostService {
       return Observable.throw(error);
     });
   } 
+
+  public  createPost(formData: FormData): Observable<Post> {
+    alert("create");
+    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/createPost', formData).map(response  => {
+      return  new  Post(response);
+    }).catch((error: any)=>{
+      return Observable.throw(error);
+    });
+  }    
 }
