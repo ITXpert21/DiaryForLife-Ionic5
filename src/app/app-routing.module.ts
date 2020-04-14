@@ -39,7 +39,19 @@ const routes: Routes = [
   {
     path: 'newpost',
     loadChildren: () => import('./newpost/newpost.module').then( m => m.NewpostPageModule)
+  },  {
+    path: 'reminder',
+    loadChildren: () => import('./reminder/reminder.module').then( m => m.ReminderPageModule)
   },
+  {
+    path: 'addreminder',
+    loadChildren: () => import('./addreminder/addreminder.module').then( m => m.AddreminderPageModule)
+  },
+  {
+    path: 'detailreminder',
+    loadChildren: () => import('./detailreminder/detailreminder.module').then( m => m.DetailreminderPageModule)
+  },
+
 
 ];
 

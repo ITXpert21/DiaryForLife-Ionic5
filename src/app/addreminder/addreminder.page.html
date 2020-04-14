@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="goBack()"></ion-icon>
+    </ion-buttons>    
+    <div style="width: 100%; text-align: center; margin-left: -20px; ">
+      <ion-title>New Reminder</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label> Date</ion-label>
+      <ion-datetime placeholder="Select Date"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label> Time</ion-label>
+      <ion-datetime display-format="h:mm A" picker-format="h:mm A" placeholder="Select Time"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Comment</ion-label>
+      <ion-textarea placeholder="Enter reminder description...">
+      </ion-textarea>
+    </ion-item>    
+  </ion-list>
+  <ion-button expand="block" class="submitBtn">Submit</ion-button> 
+
+</ion-content>

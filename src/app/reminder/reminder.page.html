@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-icon name="add-circle-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="gotoAddReminder()"></ion-icon>
+    </ion-buttons>
+    <div style="width: 100%; text-align: center; margin-left: 20px; ">
+      <ion-title>Reminder</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label> 8:00 PM, April 9 2020</ion-label>
+    <ion-button  size='small' color="primary" (click)="gotoDetail()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>     
+    <ion-button  (click)="removeReminder()" size='small' color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button> 
+  </ion-item>
+  <ion-item>
+    <ion-label> 8:00 PM, April 9 2020</ion-label>
+    <ion-button  size='small' color="primary" (click)="gotoDetail()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>     
+    <ion-button  (click)="removeReminder()" size='small' color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button> 
+  </ion-item>
+  <ion-item>
+    <ion-label> 8:00 PM, April 9 2020</ion-label>
+    <ion-button  size='small' color="primary" (click)="gotoDetail()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>     
+    <ion-button  (click)="removeReminder()" size='small' color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-button> 
+  </ion-item>  
+
+</ion-content>
+<ion-footer>
+  <ion-row  style="width: 100%">
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="home" style="font-size: 20pt;" (click)="gotoHome()"></ion-icon>
+    </ion-col>
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="notifications-circle" style="font-size: 20pt;  color: #04d082;" ></ion-icon>
+    </ion-col>
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="person" style="font-size: 20pt;" (click)="gotoProfile()"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-footer>
