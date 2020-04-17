@@ -29,13 +29,13 @@ export class ReminderPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-  }
-  ionViewWillEnter(){
     this.storage.get('token').then((val) => {
       this.token = val;
       this.getReminders();
     });
+
+  }
+  ionViewWillEnter(){
   }
   async getReminders(){
     const loading = await this.loadingController.create({

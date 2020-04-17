@@ -48,8 +48,8 @@ export class AddreminderPage implements OnInit {
     this.reminderService.createReminder( new Reminder(data)).subscribe((result) => {
       loading.dismiss();
       this.reminders = result.services;
-      //this.presentToast('Create reminder successfully.');
-      this.router.navigate(['/reminder'])
+      this.presentToast('Create reminder successfully.');
+      //this.router.navigate(['/reminder'])
     },error => {  
       this.presentToast('Create reminder failed.');
     });     
