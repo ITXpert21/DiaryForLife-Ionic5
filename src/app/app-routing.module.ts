@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'changepwd',
     loadChildren: () => import('./changepwd/changepwd.module').then( m => m.ChangepwdPageModule)
   },
+  {
+    path: 'forgotpwd',
+    loadChildren: () => import('./forgotpwd/forgotpwd.module').then( m => m.ForgotpwdPageModule)
+  },
 
 
 ];

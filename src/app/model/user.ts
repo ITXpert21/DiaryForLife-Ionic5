@@ -8,6 +8,8 @@ export  class  User {
     email: string;    
     password: string;  
     type : string;
+    msg : string;
+    status : any;
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }

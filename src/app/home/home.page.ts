@@ -54,8 +54,8 @@ export class HomePage {
      // this.storage.remove('token');
      console.log('userinfo', userinfo);
       this.storage.set('token',userinfo.token);
-      this.storage.set('email',this.password);
-      
+      this.storage.set('email',this.email);
+      this.storage.set('password',this.password);
       this.router.navigate(['/first']);
     },error => {  
       loading.dismiss();
@@ -67,6 +67,9 @@ export class HomePage {
 
   gotoSignup(){
     this.router.navigate(['/signup'])
+  }
+  gotoForgotPwd(){
+    this.router.navigate(['/forgotpwd'])
   }
 
   async presentToast(text) {

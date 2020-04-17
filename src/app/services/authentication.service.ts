@@ -55,5 +55,23 @@ export class AuthenticationService {
     }).catch((error: any)=>{
       return Observable.throw(error);
     });
+  }  
+
+  public  changePwd(postData : any){
+    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/changePassword', postData).map(response  => {
+      return  new  User(response);
+    }).catch((error: any)=>{
+      return Observable.throw(error);
+    });
   }     
+
+  public  retrivePassword(postData : any){
+    console.log("postData", postData);
+
+    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/retrieve_password', postData).map(response  => {
+      return  new  User(response);
+    }).catch((error: any)=>{
+      return Observable.throw(error);
+    });
+  } 
 }

@@ -122,7 +122,7 @@ export class SignupPage implements OnInit {
       this.authenticationService.createProduct(formData).subscribe((newUser) => {
         loading.dismiss();
         this.presentToast('User created successfully.');
-        this.deleteImage();
+        //this.deleteImage();
         this.router.navigate(['/home']);
       },error => {  
         console.log("signup error ==", error);
@@ -136,7 +136,7 @@ export class SignupPage implements OnInit {
       return this.signupForm.controls;
     }
 
-    clickDone(){
+    submit(){
       this.isSubmitted = true;
       if (!this.signupForm.valid) {
         console.log('Please provide all the required values!')
@@ -154,7 +154,9 @@ export class SignupPage implements OnInit {
       }      
       
     } 
-
+    goBack(){
+      this.router.navigate(['/home']);
+    }
     async selectImage() {
       const actionSheet = await this.actionSheetController.create({
         header: "Select Image source",

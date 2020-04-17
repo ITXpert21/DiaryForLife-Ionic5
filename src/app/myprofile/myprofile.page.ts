@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-myprofile',
@@ -10,7 +11,8 @@ export class MyprofilePage implements OnInit {
 
   constructor(    
     private route: ActivatedRoute, 
-    private router: Router) { }
+    private router: Router,
+    public storage: Storage) { }
 
   ngOnInit() {
   }
@@ -26,4 +28,10 @@ export class MyprofilePage implements OnInit {
   gotoChangePwd(){
     this.router.navigate(['/changepwd'])
   }    
+  signOut(){
+    this.storage.remove('token');
+    this.storage.remove('email');
+    this.storage.remove('password');
+    this.router.navigate(['/home'])
+  }
 }

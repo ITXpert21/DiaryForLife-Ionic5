@@ -1,5 +1,7 @@
 
-
+ion-title{
+    color: #04d082;        
+}
 ion-item{
     max-width: 80% !important;
     margin-left: auto;
@@ -45,7 +47,7 @@ ion-row.inputRow {
 .cameraImg{
     width: 120px;
     height: 120px;
-    border-color: #4a2120;
+    border-color: #04d082;
     border-width: 1px;
     border-radius: 50%;
     border-style: solid;
@@ -64,7 +66,7 @@ ion-row.inputRow {
     transform: translate(-50%, -50%);
     font-size: 30pt;
     display: block;
-    color: #4a2120;
+    color: #04d082;
 }
 .avatarImg{
     width: 100px;
@@ -74,4 +76,10 @@ ion-row.inputRow {
 .error{
     //text-align: center;
     color: red($color: #df3232);
+}
+.submitBtn{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }

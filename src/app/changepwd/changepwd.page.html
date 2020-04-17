@@ -12,15 +12,15 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-input placeholder='Please enter old password.'></ion-input>
+      <ion-input placeholder='Please enter old password.' [(ngModel)]="oldPwd"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder='Please enter new password.'></ion-input>
+      <ion-input placeholder='Please enter new password.' [(ngModel)]="newPwd"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder='Please confirm new password.'></ion-input>
+      <ion-input placeholder='Please confirm new password.' [(ngModel)]="confirmPwd"></ion-input>
     </ion-item>   
   </ion-list>
-  <ion-button expand="block" class="submitBtn">Update</ion-button> 
+  <ion-button expand="block" class="submitBtn" (click)="submit()">Update</ion-button> 
 
 </ion-content>
