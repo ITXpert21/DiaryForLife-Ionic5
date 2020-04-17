@@ -157,11 +157,12 @@ export class FirstPage implements OnInit {
     });     
   }
 
-  gotoPosts(categoryId){
+  gotoPosts(category){
 
     let navigationExtras: NavigationExtras = {
       state: {
-        categoryId: categoryId
+        categoryId: category.ID,
+        categoryName: category.name
       }
     };    
     this.router.navigate(['/post'], navigationExtras);

@@ -100,9 +100,6 @@ export class NewpostPage implements OnInit {
       this.flag_upload = false;
       this.selectedVideo = true;
      // this.playVideo();
-     console.log('vidoeid from local = ', this.videoId);
-
-
     })
     .catch(e => console.log(e));
   }
@@ -121,22 +118,7 @@ export class NewpostPage implements OnInit {
       this.flag_upload = false;
       this.selectedVideo = true;
       console.log('vidoeid = ', this.videoId);
-      // this.file.copyFile(orgFilePath, orgFilename, filedir + 'recordvideo','sample'+numstr+'.mov').then(()=>{      
-      //   var option:CreateThumbnailOptions = {
-      //     fileUri: this.videoId,
-      //     width: 100, 
-      //     height: 100, 
-      //     atTime:1, 
-      //     outputFileName: 'sample', 
-      //     quality:50
-      //   };
 
-      //   this.videoEditor.createThumbnail(option).then(result=>{
-      //       //result-path of thumbnail
-      //       console.log(result);
-      //   }).catch(e=>{
-      //   // alert('fail video editor');
-      //   });
       // });
     });
   }
@@ -272,7 +254,7 @@ export class NewpostPage implements OnInit {
     this.formData.append('categoryId', this.categoryId);
 
     const loading = await this.loadingCtrl.create({
-        message: 'Creating new user...',
+        message: 'Posting...',
     });
     await loading.present();
 
@@ -294,7 +276,7 @@ export class NewpostPage implements OnInit {
         this.flag_upload = true;
         loading.dismiss();
         this.presentToast('Posted successfully.');
-  
+        this.router.navigate(['/post']);
         }, (err) => {
       });
   

@@ -39,11 +39,17 @@ export class PostService {
   } 
 
   public  createPost(formData: FormData): Observable<Post> {
-    alert("create");
     return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/createPost', formData).map(response  => {
       return  new  Post(response);
     }).catch((error: any)=>{
       return Observable.throw(error);
     });
-  }    
+  }  
+  public getPosts(postData){
+    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/getPosts', postData).map(response  => {
+      return  new  Post(response);
+    }).catch((error: any)=>{
+      return Observable.throw(error);
+    });
+  }      
 }
