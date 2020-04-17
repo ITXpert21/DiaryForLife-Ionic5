@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'detailreminder',
     loadChildren: () => import('./detailreminder/detailreminder.module').then( m => m.DetailreminderPageModule)
   },
+  {
+    path: 'editreminder',
+    loadChildren: () => import('./editreminder/editreminder.module').then( m => m.EditreminderPageModule)
+  },
 
 
 ];

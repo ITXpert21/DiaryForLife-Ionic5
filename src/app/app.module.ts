@@ -22,7 +22,7 @@ import { StreamingMedia} from '@ionic-native/streaming-media/ngx';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
-
+import { LocalNotifications} from '@ionic-native/local-notifications/ngx'
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,6 +40,7 @@ import { VideoEditor } from '@ionic-native/video-editor/ngx';
      FileTransfer,
      StreamingMedia,
      VideoEditor,
+     LocalNotifications,
     // ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

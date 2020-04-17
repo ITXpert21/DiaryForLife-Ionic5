@@ -30,18 +30,20 @@ export class FirstPage implements OnInit {
   ngOnInit() {
     this.storage.get('token').then((val) => {
       this.token = val;
-      this.getCategories(val);
+      //alert(this.token);
+      this.getCategories();
     });
     //
   }
 
-  async getCategories(token){
+  async getCategories(){
+    //(this.token);
     const loading = await this.loadingController.create({
       message: 'Loading ...',
     });
     await loading.present();
 
-    this.categoryService.getCategories(token).subscribe((result) => {
+    this.categoryService.getCategories(this.token).subscribe((result) => {
       loading.dismiss();
       this.categories = result.services;
       if(this.categories.length > 0)

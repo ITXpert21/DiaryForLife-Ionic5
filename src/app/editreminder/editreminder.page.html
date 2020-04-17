@@ -4,7 +4,7 @@
       <ion-icon name="arrow-back-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="goBack()"></ion-icon>
     </ion-buttons>    
     <div style="width: 100%; text-align: center; margin-left: -20px; ">
-      <ion-title>New Reminder</ion-title>
+      <ion-title>Edit Reminder</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -13,18 +13,18 @@
   <ion-list>
     <ion-item>
       <ion-label> Date</ion-label>
-      <ion-datetime placeholder="Select Date" [(ngModel)]="reminderdate"></ion-datetime>
+      <ion-datetime placeholder="Select Date" [(ngModel)]="reminderdate" ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label> Time</ion-label>
-      <ion-datetime display-format="h:mm A" picker-format="h:mm A" placeholder="Select Time" [(ngModel)]="remindertime"></ion-datetime>
+      <ion-datetime display-format="h:mm A" picker-format="h:mm A" placeholder="Select Time"value={{reminder.remindertime}} [(ngModel)]="remindertime"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Comment</ion-label>
-      <ion-textarea placeholder="Enter reminder description..." [(ngModel)]="remindertext">
+      <ion-textarea placeholder="Enter reminder description..." [(ngModel)]="remindertext" value={{reminder.remindertext}}>
       </ion-textarea>
     </ion-item>    
   </ion-list>
-  <ion-button expand="block" class="submitBtn" (click)="createReminder()">Submit</ion-button> 
+  <ion-button expand="block" class="submitBtn" (click)="updateReminder()">Submit</ion-button> 
 
 </ion-content>

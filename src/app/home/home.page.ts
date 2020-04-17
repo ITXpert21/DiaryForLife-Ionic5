@@ -55,7 +55,6 @@ export class HomePage {
      console.log('userinfo', userinfo);
       this.storage.set('token',userinfo.token);
       this.storage.set('email',this.password);
-      alert(userinfo.token);
       
       this.router.navigate(['/first']);
     },error => {  
