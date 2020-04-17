@@ -55,6 +55,14 @@ const routes: Routes = [
     path: 'editreminder',
     loadChildren: () => import('./editreminder/editreminder.module').then( m => m.EditreminderPageModule)
   },
+  {
+    path: 'myprofile',
+    loadChildren: () => import('./myprofile/myprofile.module').then( m => m.MyprofilePageModule)
+  },
+  {
+    path: 'changepwd',
+    loadChildren: () => import('./changepwd/changepwd.module').then( m => m.ChangepwdPageModule)
+  },
 
 
 ];

@@ -9,10 +9,10 @@ ion-item{
 ion-col.alignclass {
     text-align: center;
 }
-
 ion-title{
     color: #04d082;        
 }
+
 ion-row.avatarRow {
     align-items: center; 
     justify-content: center;
@@ -22,10 +22,16 @@ ion-row.inputRow {
     align-items: center; 
     justify-content: center;
 } 
-
+.sectionBtn{
+    max-width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+}
 .pageHeader {
-    --background: #4a2120; 
+    --background: white; 
     align-items: center;
+    
 } 
 .headerIcon{
     font-size: 28pt;
@@ -82,9 +88,3 @@ ion-row.inputRow {
   .one-image {
     margin: 2px;
   }
-  .submitBtn{
-    max-width: 80% !important;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-}

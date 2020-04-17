@@ -1,0 +1,40 @@
+<ion-header >
+  <ion-toolbar class="pageHeader">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button color='light'></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title class="ion-text-center">Profile</ion-title>
+    <!-- <ion-buttons slot="end">
+      <div *ngIf="profileAction">
+        <ion-button  fill="clear" (click)="clickDone()"><span style="color: aliceblue;">Done</span></ion-button>
+      </div>
+      <div *ngIf="!profileAction">
+        <ion-button fill="clear" (click)="clickEdit()"><span style="color: aliceblue;">Edit</span></ion-button>
+      </div>
+
+    </ion-buttons> -->
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" class="sectionBtn" shape="round" fill="outline" (click)="gotoProfileInfo()">Profile Info</ion-button> 
+  <ion-button expand="block" class="sectionBtn" shape="round" fill="outline" (click)="gotoChangePwd()">Change Password</ion-button> 
+  <ion-button expand="block" class="sectionBtn" shape="round" fill="outline" (click)="signOut()">Sign out</ion-button> 
+
+</ion-content>
+<ion-footer>
+  <ion-row  style="width: 100%">
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="home" style="font-size: 20pt; " (click)="gotoFirst()"></ion-icon>
+    </ion-col>
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="notifications-circle" style="font-size: 20pt;" (click)="gotoReminder()"></ion-icon>
+    </ion-col>
+    <ion-col size='4' style="text-align: center;">
+      <ion-icon name="person" style="font-size: 20pt; color: #04d082;" ></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+

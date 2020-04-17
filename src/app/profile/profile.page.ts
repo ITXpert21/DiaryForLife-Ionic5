@@ -26,10 +26,13 @@ export class ProfilePage implements OnInit {
   toggle() { this.shouldShow = !this.shouldShow; }  
   profileData : any;
   email : string;
-  birthday : string;
+  birthday : any;
   gender : string;
   first_name : string;
   last_name : string;
+  address : any;
+  phonenumber : any;
+
   password : string;
   userImage : string;
   croppedImagepath = "";
@@ -70,8 +73,12 @@ export class ProfilePage implements OnInit {
     this.profileForm = this.formBuilder.group({
       firstname_form: ['', [Validators.required, Validators.minLength(2)]],
       lastname_form: ['', [Validators.required, Validators.minLength(2)]],
-      password_form: ['', [Validators.required, Validators.minLength(6)]],
+      // password_form: ['', [Validators.required, Validators.minLength(6)]],
       email_form: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9]+[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$')]],
+      address_form: ['', [Validators.required, Validators.minLength(2)]],
+      birthday_form: ['', [Validators.required, Validators.minLength(6)]],
+      phonenumber_form: ['', [Validators.required]],
+
     })    
   }
   async getProfile(){
@@ -89,11 +96,13 @@ export class ProfilePage implements OnInit {
       loading.dismiss();
       this.showContent = true;
        this.profileInfo = profileinfo;
-       
+       console.log(profileinfo)
        this.first_name = this.profileInfo.first_name;
        this.last_name = this.profileInfo.last_name;
        this.email = this.profileInfo.email;
-       this.password = this.profileInfo.password;
+       this.birthday = this.profileInfo.birthday;
+       this.address = this.profileInfo.address;
+       this.phonenumber = this.profileInfo.phonenumber;
        this.userImage = this.profileInfo.userImage;
 
       this.profileForm.get('firstname_form').setValue(this.first_name, {
@@ -105,14 +114,22 @@ export class ProfilePage implements OnInit {
       this.profileForm.get('email_form').setValue(this.email, {
         onlyself: true
       });  
-      this.profileForm.get('password_form').setValue(this.password, {
+      this.profileForm.get('birthday_form').setValue(this.birthday, {
         onlyself: true
-      });    
-
+      });  
+      this.profileForm.get('address_form').setValue(this.address, {
+        onlyself: true
+      });
+      this.profileForm.get('phonenumber_form').setValue(this.phonenumber, {
+        onlyself: true
+      });      
     },error => {  
       loading.dismiss();
 
     });  
+  }
+  goBack(){
+    this.router.navigate(['/myprofile']);
   }
   gotoHome(){
     this.storage.remove('token')
@@ -121,7 +138,7 @@ export class ProfilePage implements OnInit {
   get errorControl() {
     return this.profileForm.controls;
   }
-  clickDone(){
+  submit(){
     this.isSubmitted = true;
     if (!this.profileForm.valid) {
       console.log('Please provide all the required values!')
@@ -133,10 +150,11 @@ export class ProfilePage implements OnInit {
       this.first_name = formvalue.firstname_form;
       this.last_name = formvalue.lastname_form;
       this.email = formvalue.email_form;
-      this.password = formvalue.password_form; 
+      this.birthday = formvalue.birthday_form; 
+      this.address = formvalue.address_form; 
+      this.phonenumber = formvalue.phonenumber_form; 
+
     }     
-    this.profileReadonly = true;
-    this.profileAction = false;
     this.startUpload();
   } 
   
@@ -148,9 +166,9 @@ export class ProfilePage implements OnInit {
 
     this.authenticationService.updateProfile(formData).subscribe((newUser) => {
       loading.dismiss();
-      this.presentToast('Profile updated successfully.');
-      this.deleteImage();
-      //this.router.navigate(['/home']);
+      //this.presentToast('Profile updated successfully.');
+      //this.deleteImage();
+      this.router.navigate(['/myprofile']);
     },error => {  
       loading.dismiss();
       this.presentToast("Update profile failed.");
@@ -170,7 +188,11 @@ export class ProfilePage implements OnInit {
         formData.append('first_name', this.first_name);
         formData.append('last_name', this.last_name);
         formData.append('email', this.email);
-        formData.append('password', this.password);
+        formData.append('birthday', this.birthday);
+        formData.append('address', this.address);
+        formData.append('phonenumber', this.phonenumber);
+
+
         this.updateProfile(formData);
     };
     reader.readAsArrayBuffer(file);
@@ -183,7 +205,9 @@ export class ProfilePage implements OnInit {
       formData.append('token', this.token);
       formData.append('last_name', this.last_name);
       formData.append('email', this.email);
-      formData.append('password', this.password);
+      formData.append('birthday', this.birthday);
+      formData.append('address', this.address);
+      formData.append('phonenumber', this.phonenumber);
       formData.append('role', 'player');
       this.updateProfile(formData);
       return;
@@ -204,7 +228,6 @@ export class ProfilePage implements OnInit {
 
   } 
   async selectImage() {
-    if(!this.profileAction) return;
     const actionSheet = await this.actionSheetController.create({
       header: "Select Image source",
       buttons: [{
@@ -249,17 +272,19 @@ export class ProfilePage implements OnInit {
                  correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
                  currentName = filePath.substr(filePath.lastIndexOf('/') + 1);
               }
-               // let currentName = filePath.substr(filePath.lastIndexOf('/') + 1);
-
-                // alert("correctPath = " + correctPath);
-                // alert("currentName = " + currentName);
-                this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-            });
+              let native_filePath = correctPath + currentName;
+              let resPath = this.pathForImage(native_filePath);
+              this.selectedAvatarFromDevice = true;
+              this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
+                });
     } else {
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-    }
+        let native_filePath = correctPath + currentName;
+        let resPath = this.pathForImage(native_filePath);
+        this.selectedAvatarFromDevice = true;
+        this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
+  }
   });
 
   } 

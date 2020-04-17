@@ -104,7 +104,7 @@ export class ReminderPage implements OnInit {
     this.router.navigate(['/first'])
   } 
   gotoProfile(){
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/myprofile'])
   } 
   gotoAddReminder(){
     this.router.navigate(['/addreminder'])

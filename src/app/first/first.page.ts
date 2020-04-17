@@ -158,7 +158,7 @@ export class FirstPage implements OnInit {
     this.router.navigate(['/reminder']);
   }    
   gotoProfile(){
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/myprofile'])
   }  
   async presentToast(text) {
     const toast = await this.toastController.create({
