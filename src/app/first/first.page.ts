@@ -30,20 +30,23 @@ export class FirstPage implements OnInit {
   ngOnInit() {
     this.storage.get('token').then((val) => {
       this.token = val;
-      //alert(this.token);
-      this.getCategories();
+      this.getCategories(val);
     });
-    //
   }
-
-  async getCategories(){
+  ionViewWillEnter(){
+    // this.storage.get('token').then((val) => {
+    //   this.token = val;
+    //   this.getCategories(val);
+    // });
+  }
+  async getCategories(token){
     //(this.token);
     const loading = await this.loadingController.create({
       message: 'Loading ...',
     });
     await loading.present();
 
-    this.categoryService.getCategories(this.token).subscribe((result) => {
+    this.categoryService.getCategories(token).subscribe((result) => {
       loading.dismiss();
       this.categories = result.services;
       if(this.categories.length > 0)
@@ -89,9 +92,13 @@ export class FirstPage implements OnInit {
     await loading.present();
 
     this.categoryService.removeCategory(  new Category(postData)).subscribe((result) => {
-      console.log(result);
       loading.dismiss();
       this.categories = result.services;
+      if(this.categories.length > 0)
+        this.isEmptyCategories = false;
+      else
+        this.isEmptyCategories = true;
+
       this.presentToast('Removed category successfully.');
     },error => {  
       this.presentToast('Removed category failed.');
@@ -138,6 +145,12 @@ export class FirstPage implements OnInit {
     this.categoryService.createCategory( new Category(data)).subscribe((result) => {
       loading.dismiss();
       this.categories = result.services;
+      
+      if(this.categories.length > 0)
+        this.isEmptyCategories = false;
+      else
+        this.isEmptyCategories = true;
+
       this.presentToast('Create category successfully.');
     },error => {  
       this.presentToast('Create category failed.');
