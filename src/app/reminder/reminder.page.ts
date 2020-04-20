@@ -37,6 +37,7 @@ export class ReminderPage implements OnInit {
   }
   ionViewWillEnter(){
   }
+
   async getReminders(){
     const loading = await this.loadingController.create({
       message: 'Loading ...',

@@ -254,7 +254,7 @@ export class NewpostPage implements OnInit {
     this.formData.append('categoryId', this.categoryId);
 
     const loading = await this.loadingCtrl.create({
-        message: 'Posting...',
+        message: 'Saving your post...',
     });
     await loading.present();
 
@@ -269,16 +269,23 @@ export class NewpostPage implements OnInit {
         params: { post_id : result.post_id },
         chunkedMode: false
       }
-
-      fileTransfer.upload(this.videoId, 'http://mydiaryforlife.betaplanets.com/wp-json/mobileapi/v1/uploadVideo', options1)
-      .then((data) => {
-        console.log('data=======', data);
-        this.flag_upload = true;
+alert(this.videoId);
+      if(this.videoId == undefined){
         loading.dismiss();
         this.presentToast('Posted successfully.');
         this.router.navigate(['/post']);
-        }, (err) => {
-      });
+      }else
+      {
+        fileTransfer.upload(this.videoId, 'http://mydiaryforlife.betaplanets.com/wp-json/mobileapi/v1/uploadVideo', options1)
+        .then((data) => {
+          this.flag_upload = true;
+          loading.dismiss();
+          this.presentToast('Posted successfully.');
+          this.router.navigate(['/post']);
+          }, (err) => {
+        });
+
+      }
   
     },error => {  
       loading.dismiss();

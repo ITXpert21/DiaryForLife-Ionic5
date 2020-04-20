@@ -81,7 +81,6 @@ export class FirstPage implements OnInit {
     await alert.present();
   }
   async removeCategory(){
-    console.log("categoryID", this.selectedCategoryId);
     let postData = {
       token : this.token,
       categoryId : this.selectedCategoryId

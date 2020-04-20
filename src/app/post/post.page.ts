@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { PostService  } from '../services/post.service';
 import { Storage } from '@ionic/storage';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 import { Post } from  '../model/post';
 
 @Component({
@@ -12,6 +12,7 @@ import { Post } from  '../model/post';
 })
 export class PostPage implements OnInit {
   isViewType = false;  //if viewtype is false, it is listtype, else it is gridtype
+  isExistPost = false;
   categoryId : any;
   categoryName : any;
   token : any;
@@ -25,7 +26,7 @@ export class PostPage implements OnInit {
     public storage: Storage,
     private loadingController: LoadingController,
     private toastController: ToastController,
-
+    public alertController: AlertController,
 
   ) {
     
@@ -99,5 +100,40 @@ export class PostPage implements OnInit {
   selectViewType(){
     this.isViewType = !this.isViewType
   }
+  async removePost(post){
+    let postData = {
+      token : this.token,
+      categoryId : post.post_type,
+      postId : post.ID
+    }
+    const loading = await this.loadingController.create({
+      message: 'Removing post ...',
+    });
+    await loading.present();
 
+    this.postService.removePost( new Post(postData)).subscribe((result) => {
+      loading.dismiss();
+      this.postlist = result.services;
+
+      if(this.postlist.length > 0)
+        this.isExistPost = true;
+      else
+        this.isExistPost = false;
+
+      this.presentToast('Removed post successfully.');
+    },error => {  
+      this.presentToast('Removed post failed.');
+    });       
+  }
+  
+
+
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+        message: text,
+        position: 'top',
+        duration: 3000
+    });
+    toast.present();
+  }  
 }

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController  } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { LocalNotifications, ELocalNotificationTriggerUnit} from '@ionic-native/local-notifications/ngx'
+import { Storage } from '@ionic/storage';
+import { Router} from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,7 +17,10 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private localNotifications: LocalNotifications
+    public storage: Storage,
+    private router: Router,
+    public navCtrl: NavController
+
   ) {
     this.sideMenu();
     this.initializeApp();
@@ -26,31 +31,17 @@ export class AppComponent {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      // this.localNotifications.schedule([{
-      //   id: 1,
-      //   trigger: {in : 20, unit : ELocalNotificationTriggerUnit.SECOND},
-      //   text: 'Multi 1111111111'
-      // },
-      // {
-      //   id: 2,
-      //   trigger: {in : 40, unit : ELocalNotificationTriggerUnit.SECOND},
-      //   title: 'Local ILocalNotification Example',
-      //   text: 'Multi 222222222222222'
+      this.storage.get('token').then((val) => {
+        
+        if(val != null)
+          this.navCtrl.navigateRoot('/first');
+        else
+          this.router.navigateByUrl('/');
+      });
 
-      // }]);
-      //Fri Apr 17 2020 04:01:39 GMT+0800
-      var today = new Date(); 
-      //console.log("today", today);
-      var newYear = new Date("Fri Apr 17 2020 04:01:39 GMT+0800"); 
-      console.log('getTriggerMinutes', this.getTriggerMinutes(today, newYear));
     });
   }
   
-  getTriggerMinutes(currentDate, reminderDate){
-    var dif = (reminderDate - currentDate); 
-    var dif = Math.round((dif/1000)/60); 
-    return dif;
-  }
   sideMenu()
   {
     this.navigate =

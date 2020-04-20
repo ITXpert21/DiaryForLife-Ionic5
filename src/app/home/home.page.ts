@@ -14,6 +14,8 @@ export class HomePage {
   username : string;
   password : string;
   data: any;
+  token : any;
+
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
@@ -25,11 +27,16 @@ export class HomePage {
       this.route.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
           this.data = this.router.getCurrentNavigation().extras.state.user;
-          console.log("data======", this.data);
         }
       });
   }
+  
+  ngOnInit() {
+  }
 
+  ionViewWillEnter(){
+
+  }  
   async login(){
     if(this.email == undefined){
       this.presentToast("please insert email");

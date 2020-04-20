@@ -51,5 +51,12 @@ export class PostService {
     }).catch((error: any)=>{
       return Observable.throw(error);
     });
-  }      
+  }  
+  public  removePost(postData: Post): Observable<Post>{
+    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/removePost', postData).map(response  => {
+      return  new  Post(response);
+    }).catch((error: any)=>{
+      return Observable.throw(error);
+    });
+  }     
 }
