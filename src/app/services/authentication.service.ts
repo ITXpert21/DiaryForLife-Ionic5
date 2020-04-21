@@ -19,7 +19,6 @@ export class AuthenticationService {
   constructor(private  httpClient : HttpClient) { }
 
   public  createProduct(formData: FormData): Observable<User> {
-    alert("create");
     return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/register', formData).map(response  => {
       return  new  User(response);
     }).catch((error: any)=>{

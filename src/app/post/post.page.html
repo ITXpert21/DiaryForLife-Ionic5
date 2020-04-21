@@ -43,22 +43,31 @@
         <ion-icon name="grid-outline" style="font-size: 16pt; color: #04d082; margin-right: 10px;" (click)="selectViewType()"></ion-icon>
       </ion-col>
     </ion-row>
+    <div *ngIf="isExistPost">
+      <ion-list *ngFor="let post of postlist">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src={{post.postmeta}}>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{post.post_title}}</h2>
+            <h3>{{post.post_date}}</h3>
+          </ion-label>
+          <ion-button  (click)="editPost(post)" size='small' color="primary">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>         
+          <ion-button  (click)="removePost(post)" size='small' color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>        
+        </ion-item>
 
-    <ion-list *ngFor="let post of postlist">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src={{post.postmeta}}>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{post.post_title}}</h2>
-          <h3>{{post.post_date}}</h3>
-        </ion-label>
-        <ion-button  (click)="removePost(post)" size='small' color="danger">
-          <ion-icon name="trash-outline"></ion-icon>
-        </ion-button>        
-      </ion-item>
-
-    </ion-list>
+      </ion-list>
+    </div>
+    <div *ngIf="!isExistPost">
+      <!-- <ion-item>
+        <ion-label></ion-label>
+      </ion-item> -->
+    </div>  
   </div>
 
 </ion-content>

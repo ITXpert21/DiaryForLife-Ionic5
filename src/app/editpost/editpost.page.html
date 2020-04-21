@@ -4,7 +4,7 @@
         <ion-icon name="arrow-back-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="goBack()"></ion-icon>
     </ion-buttons>
     <div style="width: 100%; text-align: center; margin-left: -20px;">
-      <ion-title>New Post </ion-title>
+      <ion-title>Detail Post </ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -48,9 +48,9 @@
           <!-- <video [src]="videoId" width="100%" height="200"></video> -->
           <ion-icon name="play-circle-outline" class="cameraIcon" (click)="playVideo()"></ion-icon>
         </div>
+
         <div class='mainImg' *ngIf="!selectedVideo">
           <ion-icon name="videocam-outline" class="cameraIcon"></ion-icon>
-          
         </div>
       </ion-col>
     </ion-row>    
@@ -58,27 +58,3 @@
   <ion-button expand="block" class="submitBtn" (click)="submit()">Submit</ion-button> 
 </ion-content>
 
-<!-- <ion-header>
-  <ion-navbar>
-  <ion-title>
-  Upload Video
-  </ion-title>
-  </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-  <ion-grid class="grid">
-  <ion-row class="row">
-  <ion-col class="col">
-  <button ion-button color="secondary" (click)="presentActionSheet()">Browse Video</button>
-  </ion-col>
-  <ion-col class="col">
-  <button ion-button color="secondary" (click)="playVideo()" [disabled]="flag_play">Play Video</button>
-  </ion-col>
-  </ion-row>
-  <ion-row class="row">
-  <ion-col class="col">
-  <button ion-button full block [disabled]="flag_upload" (click)="uploadVideo()">Upload Video</button>
-  </ion-col>
-  </ion-row>
-  </ion-grid></ion-content> -->

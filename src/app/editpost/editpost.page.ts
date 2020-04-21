@@ -14,22 +14,24 @@ import { VideoEditor,CreateThumbnailOptions } from '@ionic-native/video-editor/n
 import { Storage } from '@ionic/storage';
 import { Post } from  '../model/post';
 import { PostService  } from '../services/post.service';
-
-
 @Component({
-  selector: 'app-newpost',
-  templateUrl: './newpost.page.html',
-  styleUrls: ['./newpost.page.scss'],
+  selector: 'app-editpost',
+  templateUrl: './editpost.page.html',
+  styleUrls: ['./editpost.page.scss'],
 })
-export class NewpostPage implements OnInit {
+export class EditpostPage implements OnInit {
   categoryId : any;
   selectedVideo = false;
-  uploadedVideo: string;
+  isSelectedVideoFromDevice = false;
+  isSelectedPictureFromDevice = false;
 
+  uploadedVideo: string;
+  postInfo : any;
   loader: any;
   videoId: any;
   flag_upload = true;
   flag_play = true;
+  postlist : any[];
 
   post_content : string;
   post_title : string;
@@ -57,18 +59,59 @@ export class NewpostPage implements OnInit {
     private filePath: FilePath,
     private webview: WebView,
     public videoEditor : VideoEditor
-
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.categoryId = this.router.getCurrentNavigation().extras.state.categoryId;
-        console.log("data======", this.categoryId);
+        this.postInfo = this.router.getCurrentNavigation().extras.state.post;
+        this.getPostById();        
       }
     });    
     this.formData = new FormData();
   }
+  async getPostById(){
+
+    await this.storage.get('token').then((data)=>{
+      this.token = data;
+    });  
+    let postData = {
+      token : this.token,
+      postId : this.postInfo.ID
+    }
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+    });
+    await loading.present();
+
+    this.postService.getPostById(postData).subscribe((result) => {
+      console.log("result",result.post_title );
+      loading.dismiss();
+      // this.postlist = result.services;
+        this.post_title = result.post_title;
+        this.post_content = result.post_content;
+        
+        if( result.post_picture.indexOf('noimage.jpg') >= 0)
+          this.loadImage.path = '';
+        else
+          this.loadImage.path = result.post_picture;
+
+        console.log("loadImage", this.loadImage.path);
+        if(this.loadImage.path == '')
+          this.showAvatar = false;
+        else
+          this.showAvatar = true;  
+
+        this.videoId = result.post_video;
+        if(this.videoId == '')
+          this.selectedVideo = false;
+        else  
+          this.selectedVideo = true;
+
+    },error => {  
+
+    });  
+  }  
   async presentActionSheet() {
     let actionSheet = await this.actionSheetCtrl.create({
       header: 'Select Image Source',
@@ -76,11 +119,14 @@ export class NewpostPage implements OnInit {
         {
           text: 'Load from Gallery',
           handler: () => {
+            alert("aaaa");
+            this.isSelectedVideoFromDevice = true;
             this.getVideo();
         }},
         {
           text: 'Use Camera',
           handler: () => {
+            this.isSelectedVideoFromDevice = true;
             this.capturevideo();
         }},
         {
@@ -120,8 +166,7 @@ export class NewpostPage implements OnInit {
       this.flag_play = false;
       this.flag_upload = false;
       this.selectedVideo = true;
-
-      // });
+      
     });
   }
 
@@ -202,6 +247,7 @@ export class NewpostPage implements OnInit {
           let native_filePath = correctPath + currentName;
           let resPath = this.pathForImage(native_filePath);
           this.showAvatar = true;
+          this.isSelectedPictureFromDevice = true;
           this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
 
         });
@@ -211,6 +257,7 @@ export class NewpostPage implements OnInit {
           let native_filePath = correctPath + currentName;
           let resPath = this.pathForImage(native_filePath);
           this.showAvatar = true;
+          this.isSelectedPictureFromDevice = true;
           this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
 
           //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
@@ -252,14 +299,14 @@ export class NewpostPage implements OnInit {
     this.formData.append('post_title', this.post_title);
     this.formData.append('post_content', this.post_content);
     this.formData.append('token', this.token);
-    this.formData.append('categoryId', this.categoryId);
+    this.formData.append('postId', this.postInfo.ID);
 
     const loading = await this.loadingCtrl.create({
         message: 'Saving your post...',
     });
     await loading.present();
 
-    this.postService.createPost(this.formData).subscribe((result) => {
+    this.postService.updatePost(this.formData).subscribe((result) => {
       const fileTransfer: FileTransferObject = this.transfer.create();
 
       let options1: FileUploadOptions = {
@@ -267,31 +314,25 @@ export class NewpostPage implements OnInit {
         fileName: this.videoId,
         headers: {},
         mimeType: "multipart/form-data",
-        params: { post_id : result.post_id },
+        params: { post_id : this.postInfo.ID },
         chunkedMode: false
       }
-      if(this.videoId == undefined){
-        loading.dismiss();
-        this.presentToast('Posted successfully.');
-        this.router.navigate(['/post']);
-      }else
-      {
+      if(this.isSelectedVideoFromDevice){
+        
         fileTransfer.upload(this.videoId, 'http://mydiaryforlife.betaplanets.com/wp-json/mobileapi/v1/uploadVideo', options1)
         .then((data) => {
           this.flag_upload = true;
           loading.dismiss();
-          this.presentToast('Posted successfully.');
-          let navigationExtras: NavigationExtras = {
-            state: {
-              categoryId: this.categoryId
-            }
-          };    
-          this.router.navigate(['/post'], navigationExtras);
+          this.presentToast('Updated successfully.');
+          this.router.navigate(['/post']);
           }, (err) => {
         });
-
+      }else{
+        loading.dismiss();
+        this.presentToast('Posted successfully.');
+        this.router.navigate(['/post']);        
       }
-  
+ 
     },error => {  
       loading.dismiss();
       this.presentToast(error.error.errormsg);
@@ -313,7 +354,7 @@ export class NewpostPage implements OnInit {
       this.token = data;
     });
 
-    if(this.loadImage.filePath != '')
+    if(this.isSelectedPictureFromDevice)
       await this.makeFormDataForFeatureImage(this.loadImage.filePath);
     else
       this.registerNewPost();  
@@ -330,5 +371,5 @@ export class NewpostPage implements OnInit {
     });
     toast.present();
   }  
-    
+
 }

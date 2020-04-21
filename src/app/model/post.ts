@@ -6,6 +6,8 @@ export  class  Post {
     post_title : string;
     post_date : string;
     post_content : string;
+    post_picture : string;
+    post_video : string;
     services : [];
     constructor(values: Object = {}) {
         Object.assign(this, values);
