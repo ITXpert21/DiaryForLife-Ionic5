@@ -67,11 +67,7 @@ const routes: Routes = [
   {
     path: 'forgotpwd',
     loadChildren: () => import('./forgotpwd/forgotpwd.module').then( m => m.ForgotpwdPageModule)
-  },  {
-    path: 'editpost',
-    loadChildren: () => import('./editpost/editpost.module').then( m => m.EditpostPageModule)
   },
-
 
 
 ];

@@ -45,13 +45,6 @@ export class PostService {
       return Observable.throw(error);
     });
   }  
-  public  updatePost(formData: FormData): Observable<Post> {
-    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/updatePost', formData).map(response  => {
-      return  new  Post(response);
-    }).catch((error: any)=>{
-      return Observable.throw(error);
-    });
-  }  
   public getPosts(postData){
     return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/getPosts', postData).map(response  => {
       return  new  Post(response);
@@ -65,12 +58,5 @@ export class PostService {
     }).catch((error: any)=>{
       return Observable.throw(error);
     });
-  }   
-  public getPostById(postData){
-    return  this.httpClient.post(this.baseUrl + 'mobileapi/v1/getPostById', postData).map(response  => {
-      return  new  Post(response);
-    }).catch((error: any)=>{
-      return Observable.throw(error);
-    });
-  }  
+  }     
 }

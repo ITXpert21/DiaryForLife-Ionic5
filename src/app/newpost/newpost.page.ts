@@ -93,18 +93,15 @@ export class NewpostPage implements OnInit {
   }
 
   getVideo() {
-    if (this.plt.is('android') /*&& sourceType === this.camera.PictureSourceType.PHOTOLIBRARY*/) {
-      this.fileChooser.open()
-      .then(imagePath => {
-        this.filePath.resolveNativePath(imagePath)
-        .then(filePath => {
-          this.videoId = filePath;
-          this.selectedVideo = true;
-          
-        });
-  
-      }).catch(e => console.log(e));
-    }
+    this.fileChooser.open()
+    .then(uri => {
+      this.videoId = uri;
+      this.flag_play = false;
+      this.flag_upload = false;
+      this.selectedVideo = true;
+     // this.playVideo();
+    })
+    .catch(e => console.log(e));
   }
 
   capturevideo() {
@@ -120,6 +117,7 @@ export class NewpostPage implements OnInit {
       this.flag_play = false;
       this.flag_upload = false;
       this.selectedVideo = true;
+      console.log('vidoeid = ', this.videoId);
 
       // });
     });
@@ -145,6 +143,7 @@ export class NewpostPage implements OnInit {
     });
   }
   playVideo() {
+    alert("aaaa");
     let options: StreamingVideoOptions = {
     successCallback: () => { this.flag_upload = true; console.log('Video played'); },
     errorCallback: (e) => { console.log('Error streaming') },
@@ -270,6 +269,7 @@ export class NewpostPage implements OnInit {
         params: { post_id : result.post_id },
         chunkedMode: false
       }
+alert(this.videoId);
       if(this.videoId == undefined){
         loading.dismiss();
         this.presentToast('Posted successfully.');
@@ -281,12 +281,7 @@ export class NewpostPage implements OnInit {
           this.flag_upload = true;
           loading.dismiss();
           this.presentToast('Posted successfully.');
-          let navigationExtras: NavigationExtras = {
-            state: {
-              categoryId: this.categoryId
-            }
-          };    
-          this.router.navigate(['/post'], navigationExtras);
+          this.router.navigate(['/post']);
           }, (err) => {
         });
 
