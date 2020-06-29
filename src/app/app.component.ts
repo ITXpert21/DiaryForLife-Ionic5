@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Router} from '@angular/router';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+const STORAGE_KEY = 'post_videos';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +21,13 @@ export class AppComponent {
     private statusBar: StatusBar,
     public storage: Storage,
     private router: Router,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public backgroundMode: BackgroundMode
 
   ) {
     this.sideMenu();
     this.initializeApp();
+
   }
 
   initializeApp() {
@@ -31,6 +35,19 @@ export class AppComponent {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      // this.backgroundMode.enable();
+      // this.storage.get(STORAGE_KEY).then((result) => {
+      //   console.log(result);
+      // });
+
+      // this.backgroundMode.on("activate").subscribe(()=>{
+      //   console.log("background11111111 activate !!!!");
+      //   this.storage.get(STORAGE_KEY).then((result) => {
+      //     console.log(result);
+      //   });
+
+      // });
+
       this.storage.get('token').then((val) => {
         
         if(val != null)

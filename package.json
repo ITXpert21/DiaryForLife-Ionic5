@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@capacitor/core": "1.5.0",
+    "@ionic-native/background-mode": "^5.24.0",
     "@ionic-native/camera": "^5.22.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/crop": "^5.22.0",
@@ -42,6 +43,7 @@
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
     "cordova-plugin-advanced-http": "^2.4.1",
+    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-crop": "^0.4.0",
@@ -122,7 +124,8 @@
       "cordova-plugin-local-notification": {},
       "cordova-plugin-email-composer": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      }
+      },
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "android"

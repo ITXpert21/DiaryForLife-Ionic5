@@ -29,13 +29,14 @@ export class ReminderPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
+  }
+  ionViewWillEnter(){
     this.storage.get('token').then((val) => {
       this.token = val;
       this.getReminders();
     });
-
-  }
-  ionViewWillEnter(){
   }
 
   async getReminders(){
@@ -96,9 +97,9 @@ export class ReminderPage implements OnInit {
         this.isEmptyReminders = false;
       else
         this.isEmptyReminders = true;
-      this.presentToast('Remove reminder successfully.');
+      this.presentToast('Removed reminder successfully.');
     },error => {  
-      this.presentToast('Remove reminder failed.');
+      this.presentToast('Removed reminder failed.');
     }); 
   }
   gotoHome(){

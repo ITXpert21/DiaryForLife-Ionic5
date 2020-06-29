@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-icon name="arrow-back-outline" style="font-size: 20pt; color: #04d082; margin-right: 10px;" (click)="goBack()"></ion-icon>
+    </ion-buttons>
+    <div style="width: 100%; text-align: center; margin-left: -20px;">
+      <ion-title>New Post </ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-datetime displayFormat="MM/DD/YY" placeholder="Date of birth" [(ngModel)]="birth"></ion-datetime>
+    </ion-item>    
+    <ion-item>
+      <ion-input placeholder='Blood type' [(ngModel)]="blood_type"></ion-input>
+    </ion-item>       
+    <ion-item>
+      <ion-datetime displayFormat="MM/DD/YY" placeholder="Date first used" [(ngModel)]="first_used"></ion-datetime>
+    </ion-item>   
+    <ion-item>
+      <ion-input placeholder='Address' [(ngModel)]="address"></ion-input>
+    </ion-item>    
+    <ion-item>
+      <ion-input placeholder='Phone' [(ngModel)]="phone"></ion-input>
+    </ion-item>    
+  
+    <ion-item>
+      <ion-textarea placeholder="Comment" [(ngModel)]="comment">
+      </ion-textarea>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class='featurePhotoText'>Post Photo</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngIf="showAvatar" (click)="selectImage()">
+        <div class="mainImg" [style.background-image]="'url('+loadImage.path+')'"></div>
+      </ion-col>
+      <ion-col *ngIf="!showAvatar">
+        <div class='mainImg'>
+          <ion-icon name="camera-outline" class="cameraIcon" (click)="selectImage()"></ion-icon>
+        </div>
+      </ion-col>      
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class='featurePhotoText'>Post Video</div>
+      </ion-col>
+    </ion-row>    
+    <ion-row>
+    
+      <ion-col (click)="presentActionSheet()">
+        <div class="videoView" *ngIf="selectedVideo" >
+          <ion-icon name="play-circle-outline" class="cameraIcon" (click)="playVideo()"></ion-icon>
+        </div>
+        <div class='mainImg' *ngIf="!selectedVideo">
+          <ion-icon name="videocam-outline" class="cameraIcon"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>    
+  </ion-grid>
+  <ion-button expand="block" class="submitBtn" (click)="submit()">Submit</ion-button> 
+</ion-content>

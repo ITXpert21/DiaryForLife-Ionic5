@@ -29,7 +29,7 @@
         <ion-col style="text-align: center;" *ngFor="let row of post">
           <!-- <ion-label>{{row.post_date}}</ion-label> -->
           <img style="height: 150px; width: 100%;" src={{row.postmeta}}>
-          <ion-label>{{row.post_title}}</ion-label>
+          <ion-label>{{row.post_content}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -44,21 +44,23 @@
       </ion-col>
     </ion-row>
 
-    <ion-list *ngFor="let post of postlist">
-      <ion-item>
-        <ion-thumbnail slot="start">
-          <img src={{post.postmeta}}>
-        </ion-thumbnail>
-        <ion-label>
-          <h2>{{post.post_title}}</h2>
-          <h3>{{post.post_date}}</h3>
-        </ion-label>
-        <ion-button  (click)="removePost(post)" size='small' color="danger">
-          <ion-icon name="trash-outline"></ion-icon>
-        </ion-button>        
-      </ion-item>
-
-    </ion-list>
+      <ion-list *ngFor="let post of postlist">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src={{post.postmeta}}>
+          </ion-thumbnail>
+          <ion-label (click)="viewPost(post)">
+            <h2>{{post.post_content}}</h2>
+            <h3>{{post.post_date}}</h3>
+          </ion-label>
+          <ion-button  (click)="editPost(post)" size='small' color="primary">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>         
+          <ion-button  (click)="removePost(post)" size='small' color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>        
+        </ion-item>
+      </ion-list>
   </div>
 
 </ion-content>

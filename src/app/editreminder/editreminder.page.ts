@@ -68,7 +68,7 @@ export class EditreminderPage implements OnInit {
       loading.dismiss();
       this.reminders = result.services;
       this.presentToast('Update reminder successfully.');
-      //this.router.navigate(['/reminder'])
+      this.router.navigate(['/reminder'])
     },error => {  
       this.presentToast('Update reminder failed.');
     });     

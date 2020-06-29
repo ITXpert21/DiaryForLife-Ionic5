@@ -23,7 +23,7 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { VideoEditor } from '@ionic-native/video-editor/ngx';
 import { LocalNotifications} from '@ionic-native/local-notifications/ngx';
-
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -31,6 +31,7 @@ import { LocalNotifications} from '@ionic-native/local-notifications/ngx';
   providers: [
     StatusBar,
     SplashScreen,
+    BackgroundMode,
     Camera,
     File,
     FilePath,

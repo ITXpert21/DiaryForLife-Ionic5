@@ -14,7 +14,9 @@ import { VideoEditor,CreateThumbnailOptions } from '@ionic-native/video-editor/n
 import { Storage } from '@ionic/storage';
 import { Post } from  '../model/post';
 import { PostService  } from '../services/post.service';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
+const STORAGE_KEY = 'post_videos';
 
 @Component({
   selector: 'app-newpost',
@@ -25,14 +27,17 @@ export class NewpostPage implements OnInit {
   categoryId : any;
   selectedVideo = false;
   uploadedVideo: string;
-
+  post_id : any;
   loader: any;
   videoId: any;
   flag_upload = true;
   flag_play = true;
 
   post_content : string;
-  post_title : string;
+  post_medical : string;
+  post_age : string;
+  post_treatment : string;
+  post_selectDate : string;
   diarydate : any;
   token : any;
   loadImage = {name: "", path: "", filePath: ""};
@@ -56,6 +61,7 @@ export class NewpostPage implements OnInit {
     private plt: Platform,
     private filePath: FilePath,
     private webview: WebView,
+    public backgroundMode: BackgroundMode,
     public videoEditor : VideoEditor
 
   ) { }
@@ -64,7 +70,6 @@ export class NewpostPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.categoryId = this.router.getCurrentNavigation().extras.state.categoryId;
-        console.log("data======", this.categoryId);
       }
     });    
     this.formData = new FormData();
@@ -93,15 +98,19 @@ export class NewpostPage implements OnInit {
   }
 
   getVideo() {
-    this.fileChooser.open()
-    .then(uri => {
-      this.videoId = uri;
-      this.flag_play = false;
-      this.flag_upload = false;
-      this.selectedVideo = true;
-     // this.playVideo();
-    })
-    .catch(e => console.log(e));
+    if (this.plt.is('android') /*&& sourceType === this.camera.PictureSourceType.PHOTOLIBRARY*/) {
+      this.fileChooser.open()
+      .then(imagePath => {
+        this.filePath.resolveNativePath(imagePath)
+        .then(filePath => {
+          this.videoId = filePath;
+          this.selectedVideo = true;
+          // let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+          // let currentName = filePath.substring(filePath.lastIndexOf('/') + 1, filePath.length);
+        });
+  
+      }).catch(e => console.log(e));
+    }
   }
 
   capturevideo() {
@@ -123,27 +132,36 @@ export class NewpostPage implements OnInit {
     });
   }
 
-  uploadVideo(post_id) {
-    const fileTransfer: FileTransferObject = this.transfer.create();
-    let options1: FileUploadOptions = {
-      fileKey: 'video_upload_file',
-      fileName: this.videoId,
-      headers: {},
-      mimeType: "multipart/form-data",
-      params: { post_id : post_id },
-      chunkedMode: false
-    }
+  updateStoredImages(post_id, name) {
+    let newPostVideo = {
+      post_id : post_id,
+      name : name
+    };
+    var arr = [];
+    // arr.push(newPostVideo);
+    // console.log('arr======', arr);
+    // this.storage.set(STORAGE_KEY, arr);
 
-    fileTransfer.upload(this.videoId, 'http://mydiaryforlife.betaplanets.com/wp-json/mobileapi/v1/uploadVideo', options1)
-    .then((data) => {
-      this.flag_upload = true;
-      
-    }, (err) => {
-    
+    this.storage.get(STORAGE_KEY).then((data)=>{
+      console.log("data ===", data);
+      if(data != null)
+        arr = data;
+
+      arr.push(newPostVideo);
+      console.log('arr======', arr);
+      this.storage.set(STORAGE_KEY, arr);
     });
+  }  
+
+
+  createFileName() {
+    var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";
+    return newFileName;
   }
+
   playVideo() {
-    alert("aaaa");
     let options: StreamingVideoOptions = {
     successCallback: () => { this.flag_upload = true; console.log('Video played'); },
     errorCallback: (e) => { console.log('Error streaming') },
@@ -202,7 +220,6 @@ export class NewpostPage implements OnInit {
           let resPath = this.pathForImage(native_filePath);
           this.showAvatar = true;
           this.loadImage = { name: currentName, path: resPath, filePath: native_filePath };
-
         });
       } else {
           var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
@@ -215,7 +232,8 @@ export class NewpostPage implements OnInit {
           //this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
     });
-  } 
+  }
+
   pathForImage(img) {
     if (img === null) {
       return '';
@@ -248,7 +266,12 @@ export class NewpostPage implements OnInit {
   }
 
   async registerNewPost() {
-    this.formData.append('post_title', this.post_title);
+    this.formData.append('post_medical', this.post_medical);
+    this.formData.append('post_age', this.post_age);
+    this.formData.append('post_selectDate', this.post_selectDate);
+    
+    this.formData.append('post_treatment', this.post_treatment);
+
     this.formData.append('post_content', this.post_content);
     this.formData.append('token', this.token);
     this.formData.append('categoryId', this.categoryId);
@@ -259,31 +282,23 @@ export class NewpostPage implements OnInit {
     await loading.present();
 
     this.postService.createPost(this.formData).subscribe((result) => {
-      const fileTransfer: FileTransferObject = this.transfer.create();
+      this.post_id = result.post_id;
 
-      let options1: FileUploadOptions = {
-        fileKey: 'video_upload_file',
-        fileName: this.videoId,
-        headers: {},
-        mimeType: "multipart/form-data",
-        params: { post_id : result.post_id },
-        chunkedMode: false
-      }
-alert(this.videoId);
+
       if(this.videoId == undefined){
         loading.dismiss();
         this.presentToast('Posted successfully.');
         this.router.navigate(['/post']);
       }else
       {
-        fileTransfer.upload(this.videoId, 'http://mydiaryforlife.betaplanets.com/wp-json/mobileapi/v1/uploadVideo', options1)
-        .then((data) => {
-          this.flag_upload = true;
-          loading.dismiss();
-          this.presentToast('Posted successfully.');
-          this.router.navigate(['/post']);
-          }, (err) => {
-        });
+        this.updateStoredImages(result.post_id, this.videoId);
+        loading.dismiss();
+        let navigationExtras: NavigationExtras = {
+          state: {
+            categoryId: this.categoryId
+          }
+        };    
+        this.router.navigate(['/post'], navigationExtras);      
 
       }
   
@@ -295,7 +310,7 @@ alert(this.videoId);
 
   }
   async submit(){
-    if(this.post_title == undefined){
+    if(this.post_medical == undefined){
       this.presentToast('Please enter post title.');
       return;
     }
